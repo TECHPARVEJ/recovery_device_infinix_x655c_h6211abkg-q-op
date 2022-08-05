@@ -2,20 +2,20 @@
 system                                            /system       ext4    ro                                                                            wait,avb=vbmeta_system,first_stage_mount
 vendor                                            /vendor       ext4    ro                                                                            wait,avb,first_stage_mount,
 product                                           /product      ext4    ro                                                                            wait,avb,first_stage_mount,
-
-/dev/block/platform/bootdevice/by-name/userdata   /data         f2fs    noatime,nosuid,nodev,discard,noflush_merge,reserve_root=134217,resgid=1065    wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts
-/cache           ext4    /dev/block/platform/bootdevice/by-name/cache              flags=backup=1;wipeingui;wipeduringfactoryreset
-/dev/block/platform/bootdevice/by-name/misc       /misc         emmc    defaults                                                                      defaults
+                                                                 defaults
 /product            ext4        /dev/block/mapper/product     flags=backup=1;display="Product ext4"
 /product_image	    emmc		/dev/block/mapper/product	flags=backup=1;display="Product Image";flashimg=1
-/super          	emmc    	/dev/block/platform/bootdevice/by-name/super              flags=backup=1;display="Super_image";flashimg=1
+/super              emmc    	/dev/block/platform/bootdevice/by-name/super              flags=backup=1;display="Super_image";flashimg=1
 /system      	    ext4		/dev/block/mapper/system      flags=backup=1;display="System ext4"
 /system_image	    emmc		/dev/block/mapper/system    flags=backup=1;display="System Image";flashimg=1
 /vendor             ext4        /dev/block/mapper/vendor      flags=backup=1;display="Vendor ext4"
 /vendor_image	    emmc		/dev/block/mapper/vendor    flags=backup=1;display="Vendor Image";flashimg=1
 
 # Other partitions
-/boot            emmc    /dev/block/platform/bootdevice/by-name/boot               flags=backup=1;display="Boot";flashimg=1
+/boot     emmc    /dev/block/platform/bootdevice/by-name/boot               flags=backup=1;display="Boot";flashimg=1
+/data     f2fs    /dev/block/platform/bootdevice/by-name/userdata         noatime,nosuid,nodev,discard,noflush_merge,reserve_root=134217,resgid=1065    wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts
+/cache    ext4    /dev/block/platform/bootdevice/by-name/cache              flags=backup=1;wipeingui;wipeduringfactoryreset
+/misc     emmc    /dev/block/platform/bootdevice/by-name/misc               defaults
 /bootloader      emmc    /dev/block/platform/bootdevice/by-name/lk                 flags=backup=1;display="Bootloader (lk)"
 /bootloader2     emmc    /dev/block/platform/bootdevice/by-name/lk2                flags=backup=1;subpartitionof=/bootloader
 /boot_para	    emmc	/dev/block/platform/bootdevice/by-name/boot_para        flags=display="boot_para";backup=1
